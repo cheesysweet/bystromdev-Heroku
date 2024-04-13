@@ -35,7 +35,7 @@ router.route("").post(function(req, res) {
   var body = req.body;
 
 
-  taskSchema.findOne({ Title: body.Title, Info: body.Info }, async function(err, storedItem) { // finds out if the item exists in the database
+  taskSchema.findOne({ Title: body.Title, Info: body.Info, Date: body.Date }, async function(err, storedItem) { // finds out if the item exists in the database
           if (err) {
           res.send(err);
           } else if (storedItem === null) { // stores a new item
@@ -43,6 +43,7 @@ router.route("").post(function(req, res) {
             item.Info = body.Info
             item.Image = body.Image
             item.Status = body.Status
+            item.Date = body.Date
       
           await item.save(function(err) {
               if (err) {
